@@ -1,0 +1,78 @@
+﻿#btn-fun {
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+#pag-fun {
+    display: flex;
+    justify-content: center;
+}
+
+#btn-pag {
+    margin: 5px;
+}
+
+#txt-principal {
+    display: flex;
+    justify-content: center;
+}
+
+
+#p-btn-agregar {
+    display: flex;
+    justify-content: center;
+}
+
+#btn-agregar {
+    display: flex;
+    justify-content: center;
+    width: 180px;
+    font-size: 20px;
+}
+
+#div-consulta {
+    display: flex;
+    justify-content: center;
+}
+
+#div-respuesta-consulta {
+    display: flex;
+    justify-content: center;
+}
+
+#inp-consulta {
+    width: 120px;
+    height: 30px;
+    margin-left: 20px;
+    margin-top: 7px;
+    font-size: 20px;
+}
+
+#btn-crear {
+    width: 120px;
+    height: 30px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+#contenedor-body {
+    display: flex;
+    justify-content: center;
+}
+
+#contenedor-btn {
+    display: flex;
+    justify-content: center;
+}
+
+#form-principal {
+    margin-top: 50px;
+}
+
+#btn-principal {
+    margin: 50px;
+    width: 400px;
+    height: 100px;
+    font-size: 30px;
+}

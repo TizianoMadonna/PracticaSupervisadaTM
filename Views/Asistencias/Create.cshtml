@@ -1,0 +1,53 @@
+﻿@model PracticaSupervisada.Models.Asistencia
+
+@{
+    ViewData["Title"] = "Agregar";
+}
+<div id="contenedor-body">
+
+<h1>Agregar</h1>
+</div>
+
+<h4 id="contenedor-body">Asistencia de limpieza</h4>
+<hr />
+<div class="row" id="contenedor-body">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre_Apellido" class="control-label"></label>
+                <input asp-for="Nombre_Apellido" class="form-control" />
+                <span asp-validation-for="Nombre_Apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input value="@DateTime.Today.ToString()" asp-for="Fecha" class="form-control" type="date" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tiempo_Entrada" class="control-label"></label>
+                <input asp-for="Tiempo_Entrada" class="form-control" type="time" />
+                <span asp-validation-for="Tiempo_Entrada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tiempo_Salida" class="control-label"></label>
+                <input asp-for="Tiempo_Salida" class="form-control" type="time"/>
+                <span asp-validation-for="Tiempo_Salida" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="contenedor-btn">
+                <button id="btn-crear" class="btn-primary" type="submit">Agregar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="contenedor-btn">
+    <form asp-action="index" method="get">
+        <button id="btn-crear" class="btn-secondary">Regresar</button>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

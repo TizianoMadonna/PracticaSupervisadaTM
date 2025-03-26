@@ -1,0 +1,206 @@
+﻿@model IEnumerable<PracticaSupervisada.Models.Bidones>
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Control agua";
+    int pageNumber = ViewBag.PageNumber;
+    int pageSize = ViewBag.PageSize;
+    int totalPages = ViewBag.TotalPages;
+    int? bidonesEntregados = ViewBag.BidonesEntregados as int?;
+    int? mesSeleccionado = ViewBag.MesSeleccionado as int?;
+    int? anioSeleccionado = ViewBag.AnioSeleccionado as int?;
+}
+
+
+<div id="txt-principal">
+    <h1>Control de agua</h1>
+</div>
+<p id="p-btn-agregar">
+    <form id="p-btn-agregar" asp-action="Create" method="get">
+        <button id="btn-agregar" type="submit">Agregar</button>
+    </form>
+</p>
+<div>
+    <form asp-action="Index" method="get">
+        Mes
+        <select name="Busqmes" value="@ViewBag.Busqmes">
+            <option value="0">Seleccione un mes</option>
+            @for (int i = 1; i <= 12; i++)
+            {
+                <option value="@i">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
+            }
+        </select>
+        Año <select value="@ViewBag.Busqanio" name="Busqanio" value="@DateTime.Now.Year" min="2000" max="@DateTime.Now.Year">
+            <option value="0">Seleccione un año</option>
+            @for (int i = 2020; i <= DateTime.Now.Year; i++)
+            {
+                <option value="@i">@i</option>
+            })
+        </select>
+        <input type="submit" value="Filtrar" style="width:60px;" />
+    </form>
+
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observaciones)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observaciones)
+            </td>
+            <td>
+                    <form asp-action="Edit" asp-controller="Bidones" method="get" asp-route-Id="@item.Id">
+                        <button id="btn-fun" class="btn-info" type="submit">Editar</button>
+                    </form>
+                    <form asp-action="Delete" asp-route-Id="@item.Id" asp-controller="Bidones" onsubmit="return confirmarEliminar(this)">
+                        <button id="btn-fun" class="btn-danger" type="submit">Eliminar</button>
+                    </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div id="div-consulta">
+    <h2>Consultar bidones entregados del mes de:</h2>
+    <form asp-action="ConsultarBidonesEntregados" method="post">
+        <select id="inp-consulta" name="mes">
+            @for (int i = 1; i <= 12; i++)
+            {
+                <option value="@i">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
+            }
+        </select>
+        <select id="inp-consulta" value="@ViewBag.anioSeleccionado" name="anio" value="@DateTime.Now.Year" min="2020" max="@DateTime.Now.Year">
+            @for (int i = 2020; i <= DateTime.Now.Year; i++)
+            {
+                <option value="@i">@i</option>
+            })
+        </select>
+        <input type="submit" value="Consultar" />
+    </form>
+</div>
+
+@if (bidonesEntregados.HasValue && mesSeleccionado.HasValue && anioSeleccionado.HasValue)
+{
+    <div id="div-respuesta-consulta">
+        <h3>Bidones entregados en @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mesSeleccionado.Value) @anioSeleccionado.Value: @bidonesEntregados.Value</h3>
+    </div>
+}
+
+<div class="pagination" id="pag-fun">
+
+    @if (pageNumber > 1)
+    {
+        <form asp-action="Index" method="get">
+            @*             <input type="hidden" name="Busqfecha" value="@ViewBag.Busqfecha" />
+ *@ 
+                <input type="hidden" name="Busqanio" value="@ViewBag.Busqanio" />
+            <input type="hidden" name="Busqmes" value="@ViewBag.Busqmes" />
+            <input type="hidden" name="anio" value="@ViewBag.anioSeleccionado" />
+            <input type="hidden" name="mes" value="@ViewBag.mesSeleccionado" />
+            <input type="hidden" name="pageNumber" value="@(pageNumber - 1)" />
+            <input type="hidden" name="pageSize" value="@pageSize" />
+            <button id="btn-pag" type="submit">&larr;</button>
+        </form>
+    }
+    @if (pageNumber > 3)
+    {
+        <div>
+            <form asp-action="Index" method="get">
+                <input type="hidden" name="Busqanio" value="@ViewBag.Busqanio" />
+                <input type="hidden" name="Busqmes" value="@ViewBag.Busqmes" />
+                <input type="hidden" name="anio" value="@ViewBag.anioSeleccionado" />
+                <input type="hidden" name="mes" value="@ViewBag.mesSeleccionado" />
+                <input type="hidden" name="pageNumber" value="1" />
+                <input type="hidden" name="pageSize" value="@pageSize" />
+                <button id="btn-pag" type="submit">1</button>
+            </form>
+        </div>
+        <div style="color: black; font-size:20px;">
+            ...
+        </div>
+    }
+
+    @{
+        int startPage = Math.Max(1, pageNumber - 2);
+        int endPage = Math.Min(totalPages, pageNumber + 2);
+    }
+
+    @for (int i = startPage; i <= endPage; i++)
+    {
+        if (i == pageNumber)
+        {
+            <span>@i</span>
+        }
+        else
+        {
+            <form asp-action="Index" method="get" style="display:inline;">
+                @*                 <input type="hidden" name="Busqfecha" value="@ViewBag.Busqfecha" />
+ *@                <input type="hidden" name="Busqanio" value="@ViewBag.Busqanio" />
+                <input type="hidden" name="Busqmes" value="@ViewBag.Busqmes" />
+                <input type="hidden" name="anio" value="@ViewBag.anioSeleccionado" />
+                <input type="hidden" name="mes" value="@ViewBag.mesSeleccionado" />
+                <input type="hidden" name="pageNumber" value="@i" />
+                <input type="hidden" name="pageSize" value="@pageSize" />
+                <button id="btn-pag" type="submit" style="margin:5px;">@i</button>
+            </form>
+        }
+    }
+    @if (pageNumber < totalPages - 2)
+    {
+        <div style="color: black; font-size:20px;">
+            ...
+        </div>
+        <div>
+            <form asp-action="Index" method="get">
+                <input type="hidden" name="Busqanio" value="@ViewBag.Busqanio" />
+                <input type="hidden" name="Busqmes" value="@ViewBag.Busqmes" />
+                <input type="hidden" name="anio" value="@ViewBag.anioSeleccionado" />
+                <input type="hidden" name="mes" value="@ViewBag.mesSeleccionado" />
+                <input type="hidden" name="pageNumber" value="@totalPages" />
+                <input type="hidden" name="pageSize" value="@pageSize" />
+                <button id="btn-pag" type="submit">@totalPages</button>
+            </form>
+        </div>
+    }
+    @if (pageNumber < totalPages)
+    {
+        <form asp-action="Index" method="get">
+            @*             <input type="hidden" name="Busqfecha" value="@ViewBag.Busqfecha" />
+ *@
+            <input type="hidden" name="Busqanio" value="@ViewBag.Busqanio" />
+            <input type="hidden" name="Busqmes" value="@ViewBag.Busqmes" />
+            <input type="hidden" name="anio" value="@ViewBag.anioSeleccionado" />
+            <input type="hidden" name="mes" value="@ViewBag.mesSeleccionado" />
+            <input type="hidden" name="pageNumber" value="@(pageNumber + 1)" />
+            <input type="hidden" name="pageSize" value="@pageSize" />
+
+            <button id="btn-pag" type="submit">&rarr;</button>
+        </form>
+    }
+</div>
+
+<script>
+    function confirmarEliminar(form) {
+        return confirm("¿Está seguro que desea eliminar este registro?");
+    }
+</script>

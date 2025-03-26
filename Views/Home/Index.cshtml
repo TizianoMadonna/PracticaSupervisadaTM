@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Página principal";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/PracticaSupervisada.styles.css" asp-append-version="true" />
+<div class="text-center">
+    <form asp-controller="Asistencias" asp-action="Index" id="form-principal" method="get">
+        <button type="submit" id="btn-principal">Control de asistencias</button>
+    </form>
+    <form asp-controller="Bidones" asp-action="Index" id="form-principal" method="get">
+        <button type="submit" id="btn-principal">Control de agua</button>
+    </form>
+</div>
