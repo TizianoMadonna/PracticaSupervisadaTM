@@ -24,7 +24,7 @@ namespace PracticaSupervisada.Controllers
         public async Task<IActionResult> Index(int? Busqanio, int? Busqmes, int? pageNumber, int pageSize = 3)
         {
 
-            IQueryable<Bidones> bidones = _context.Bidones.OrderByDescending(e => e.Id).Take(400);
+            IQueryable<Bidones> bidones = _context.Bidones.OrderByDescending(e => e.Id).Take(800);
 
             if (Busqanio.HasValue && Busqanio!= 0)
             {
@@ -59,7 +59,7 @@ namespace PracticaSupervisada.Controllers
             ViewBag.MesSeleccionado = mes;
             ViewBag.AnioSeleccionado = anio;
 
-            IQueryable<Bidones> bidones = _context.Bidones.OrderByDescending(e => e.Id).Take(400);
+            IQueryable<Bidones> bidones = _context.Bidones.OrderByDescending(e => e.Id).Take(800);
             int totalBidones = await _context.Bidones.CountAsync();
             int currentPage = 1;
             int pageSize = 3;

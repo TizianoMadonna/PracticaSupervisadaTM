@@ -3,6 +3,10 @@
     margin-bottom: 10px;
 }
 
+#input-busqueda-conf {
+    width: 60px;
+}
+
 #pag-fun {
     display: flex;
     justify-content: center;
@@ -75,4 +79,154 @@
     width: 400px;
     height: 100px;
     font-size: 30px;
+}
+
+@media only screen and (max-width: 1284px) {
+    #logo{
+        width: 80px;
+    }
+
+    #input-busqueda-conf {
+        width: 100px;
+    }
+
+    #btn-fun {
+        width: 100px;
+        margin-bottom: 10px;
+    }
+
+    #pag-fun {
+        display: flex;
+        justify-content: center;
+    }
+
+    #btn-pag {
+        margin: 5px;
+    }
+
+    #txt-principal {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    #p-btn-agregar {
+        display: flex;
+        justify-content: center;
+    }
+
+    #btn-agregar {
+        display: flex;
+        justify-content: center;
+        width: 150px;
+        font-size: 17px;
+    }
+
+    #div-consulta {
+        display: flex;
+        justify-content: center;
+    }
+
+    #div-respuesta-consulta {
+        display: flex;
+        justify-content: center;
+    }
+
+    #inp-consulta {
+        width: 100px;
+        height: 26px;
+        margin-left: 17px;
+        margin-top: 7px;
+        font-size: 17px;
+    }
+
+    #btn-crear {
+        width: 100px;
+        height: 27px;
+        margin: 5px;
+        display: flex;
+        justify-content: center;
+    }
+
+    #contenedor-body {
+        display: flex;
+        justify-content: center;
+    }
+
+    #contenedor-btn {
+        display: flex;
+        justify-content: center;
+    }
+
+    #form-principal {
+        margin-top: 46px;
+    }
+
+    #btn-principal {
+        margin: 45px;
+        width: 360px;
+        height: 80px;
+        font-size: 27px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    #logo {
+        width: 60px;
+    }
+
+    #btn-fun {
+        width: 80px;
+        margin-bottom: 10px;
+    }
+
+    #pag-fun {
+        display: flex;
+        justify-content: center;
+    }
+
+    #btn-pag {
+        margin: 5px;
+    }
+
+    #btn-agregar {
+        display: flex;
+        justify-content: center;
+        width: 120px;
+        font-size: 15px;
+    }
+
+    #inp-consulta {
+        width: 100px;
+        height: 26px;
+        margin-left: 17px;
+        margin-top: 7px;
+        font-size: 17px;
+    }
+
+    #btn-crear {
+        width: 80px;
+        height: 24px;
+        margin: 5px;
+        display: flex;
+        justify-content: center;
+    }
+
+    #form-principal {
+        margin-top: 40px;
+    }
+
+    #btn-principal {
+        margin: 40px;
+        width: 330px;
+        height: 70px;
+        font-size: 23px;
+    }
+    #input-busqueda-conf {
+        width: 55px;
+        font-size: 13px;
+    }
+    #input-busqueda{
+        width:100px;
+    }
 }

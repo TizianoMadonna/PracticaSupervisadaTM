@@ -23,21 +23,21 @@
 <div>
     <form asp-action="Index" method="get">
         Mes
-        <select name="Busqmes" value="@ViewBag.Busqmes">
+        <select id="input-busqueda" name="Busqmes" value="@ViewBag.Busqmes">
             <option value="0">Seleccione un mes</option>
             @for (int i = 1; i <= 12; i++)
             {
                 <option value="@i">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
             }
         </select>
-        Año <select value="@ViewBag.Busqanio" name="Busqanio" value="@DateTime.Now.Year" min="2000" max="@DateTime.Now.Year">
+        Año <select id="input-busqueda" value="@ViewBag.Busqanio" name="Busqanio" value="@DateTime.Now.Year" min="2000" max="@DateTime.Now.Year">
             <option value="0">Seleccione un año</option>
             @for (int i = 2020; i <= DateTime.Now.Year; i++)
             {
                 <option value="@i">@i</option>
             })
         </select>
-        <input type="submit" value="Filtrar" style="width:60px;" />
+        <input id="input-busqueda-conf" type="submit" value="Filtrar" style="width:60px;" />
     </form>
 
 </div>

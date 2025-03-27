@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dPRFjIOB/yU+FhF9VfwuJA8JND12wl8WnvpC8ErPT3M=",
+  "Hash": "EReQsARCXrXNZvOOoEDFa0SbD826HRNbSQg8afKSdVw=",
   "Source": "PracticaSupervisada",
   "BasePath": "_content/PracticaSupervisada",
   "Mode": "Default",
@@ -1333,8 +1333,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "6pq2krfoun",
-      "Integrity": "Vjzs4WVCC5SypymR6Ov5zCNI1k1GjrnoVz5F5pT+2VQ=",
+      "Fingerprint": "8vn8yir30i",
+      "Integrity": "1ISGrcj9Ffhs2R3fGnGzj5Lerd/h5Ay4kuzdOnGHDZI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\PSstyle.css"
@@ -1380,6 +1380,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Usuario\\source\\repos\\PracticaSupervisada\\PracticaSupervisada\\wwwroot\\Images\\Logo.png",
+      "SourceId": "PracticaSupervisada",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\PracticaSupervisada\\PracticaSupervisada\\wwwroot\\",
+      "BasePath": "_content/PracticaSupervisada",
+      "RelativePath": "Images/Logo#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "whpin4b4pg",
+      "Integrity": "lAhNBf+IoJlrCXGlzoHJwt3kBot1LgQS4sIGbucbEMA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Logo.png"
     },
     {
       "Identity": "C:\\Users\\Usuario\\source\\repos\\PracticaSupervisada\\PracticaSupervisada\\wwwroot\\js\\site.js",
@@ -2602,7 +2623,7 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/PSstyle.6pq2krfoun.css",
+      "Route": "css/PSstyle.8vn8yir30i.css",
       "AssetFile": "C:\\Users\\Usuario\\source\\repos\\PracticaSupervisada\\PracticaSupervisada\\wwwroot\\css\\PSstyle.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -2612,7 +2633,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1129"
+          "Value": "3778"
         },
         {
           "Name": "Content-Type",
@@ -2620,11 +2641,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Vjzs4WVCC5SypymR6Ov5zCNI1k1GjrnoVz5F5pT+2VQ=\""
+          "Value": "\"1ISGrcj9Ffhs2R3fGnGzj5Lerd/h5Ay4kuzdOnGHDZI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 26 Mar 2025 16:00:37 GMT"
+          "Value": "Thu, 27 Mar 2025 13:15:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2634,7 +2655,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "6pq2krfoun"
+          "Value": "8vn8yir30i"
         },
         {
           "Name": "label",
@@ -2642,7 +2663,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Vjzs4WVCC5SypymR6Ov5zCNI1k1GjrnoVz5F5pT+2VQ="
+          "Value": "sha256-1ISGrcj9Ffhs2R3fGnGzj5Lerd/h5Ay4kuzdOnGHDZI="
         }
       ]
     },
@@ -2657,7 +2678,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1129"
+          "Value": "3778"
         },
         {
           "Name": "Content-Type",
@@ -2665,11 +2686,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Vjzs4WVCC5SypymR6Ov5zCNI1k1GjrnoVz5F5pT+2VQ=\""
+          "Value": "\"1ISGrcj9Ffhs2R3fGnGzj5Lerd/h5Ay4kuzdOnGHDZI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 26 Mar 2025 16:00:37 GMT"
+          "Value": "Thu, 27 Mar 2025 13:15:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2679,7 +2700,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Vjzs4WVCC5SypymR6Ov5zCNI1k1GjrnoVz5F5pT+2VQ="
+          "Value": "sha256-1ISGrcj9Ffhs2R3fGnGzj5Lerd/h5Ay4kuzdOnGHDZI="
         }
       ]
     },
@@ -5064,6 +5085,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "Images/Logo.png",
+      "AssetFile": "C:\\Users\\Usuario\\source\\repos\\PracticaSupervisada\\PracticaSupervisada\\wwwroot\\Images\\Logo.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "17233"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lAhNBf+IoJlrCXGlzoHJwt3kBot1LgQS4sIGbucbEMA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 27 Mar 2025 12:47:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-lAhNBf+IoJlrCXGlzoHJwt3kBot1LgQS4sIGbucbEMA="
+        }
+      ]
+    },
+    {
+      "Route": "Images/Logo.whpin4b4pg.png",
+      "AssetFile": "C:\\Users\\Usuario\\source\\repos\\PracticaSupervisada\\PracticaSupervisada\\wwwroot\\Images\\Logo.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "17233"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"lAhNBf+IoJlrCXGlzoHJwt3kBot1LgQS4sIGbucbEMA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 27 Mar 2025 12:47:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "whpin4b4pg"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/Logo.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-lAhNBf+IoJlrCXGlzoHJwt3kBot1LgQS4sIGbucbEMA="
         }
       ]
     },

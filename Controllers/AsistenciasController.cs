@@ -25,7 +25,7 @@ namespace PracticaSupervisada.Controllers
         // GET: Asistencias
         public async Task<IActionResult> Index(string? Busqnombre, int? Busqanio, int? Busqmes, int? pageNumber, int pageSize = 3)
         {
-            IQueryable<Asistencia> asistencias = _context.Asistencias.OrderByDescending(e => e.Id).Take(400);
+            IQueryable<Asistencia> asistencias = _context.Asistencias.OrderByDescending(e => e.Id).Take(800);
             if (Busqnombre != null)
             {
                 asistencias = asistencias.Where(e => e.Nombre_Apellido.Contains(Busqnombre));
@@ -65,7 +65,7 @@ namespace PracticaSupervisada.Controllers
             ViewBag.MesSeleccionado = mes;
             ViewBag.AnioSeleccionado = anio;
 
-            IQueryable<Asistencia> asistencias = _context.Asistencias.OrderByDescending(e => e.Id).Take(400);
+            IQueryable<Asistencia> asistencias = _context.Asistencias.OrderByDescending(e => e.Id).Take(800);
             int totalAsistencias = await _context.Asistencias.CountAsync();
             int currentPage = 1; 
             int pageSize = 3; 
