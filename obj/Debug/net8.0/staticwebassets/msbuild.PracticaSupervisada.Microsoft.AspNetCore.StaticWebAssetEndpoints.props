@@ -1,16 +1,16 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAssetEndpoint Include="_content/PracticaSupervisada/css/PSstyle.8vn8yir30i.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\PSstyle.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"8vn8yir30i"},{"Name":"integrity","Value":"sha256-1ISGrcj9Ffhs2R3fGnGzj5Lerd/h5Ay4kuzdOnGHDZI="},{"Name":"label","Value":"_content/PracticaSupervisada/css/PSstyle.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"3778"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00221ISGrcj9Ffhs2R3fGnGzj5Lerd/h5Ay4kuzdOnGHDZI=\u0022"},{"Name":"Last-Modified","Value":"Thu, 27 Mar 2025 13:15:58 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/PracticaSupervisada/css/PSstyle.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\PSstyle.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-1ISGrcj9Ffhs2R3fGnGzj5Lerd/h5Ay4kuzdOnGHDZI="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"3778"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00221ISGrcj9Ffhs2R3fGnGzj5Lerd/h5Ay4kuzdOnGHDZI=\u0022"},{"Name":"Last-Modified","Value":"Thu, 27 Mar 2025 13:15:58 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Vp4T7M/swl7132AmWdFpi55OxPBToGg5bQiCjhmsIjA="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4116"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022Vp4T7M/swl7132AmWdFpi55OxPBToGg5bQiCjhmsIjA=\u0022"},{"Name":"Last-Modified","Value":"Fri, 28 Mar 2025 14:43:27 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/PracticaSupervisada/css/PSstyle.qw5z166ybo.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\PSstyle.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qw5z166ybo"},{"Name":"integrity","Value":"sha256-Vp4T7M/swl7132AmWdFpi55OxPBToGg5bQiCjhmsIjA="},{"Name":"label","Value":"_content/PracticaSupervisada/css/PSstyle.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4116"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022Vp4T7M/swl7132AmWdFpi55OxPBToGg5bQiCjhmsIjA=\u0022"},{"Name":"Last-Modified","Value":"Fri, 28 Mar 2025 14:43:27 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/PracticaSupervisada/css/site.c2tiyv64ts.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>

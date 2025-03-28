@@ -95,13 +95,13 @@
                 <option value="@i">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
             }
         </select>
-        <select id="inp-consulta" value="@ViewBag.anioSeleccionado" name="anio" value="@DateTime.Now.Year" min="2020" max="@DateTime.Now.Year">
-            @for (int i = 2020; i <= DateTime.Now.Year; i++)
+        <select id="inp-consulta" value="@ViewBag.anioSeleccionado" name="anio" value="@DateTime.Now.Year" min="2025" max="@DateTime.Now.Year">
+            @for (int i = 2025; i <= DateTime.Now.Year; i++)
             {
                 <option value="@i">@i</option>
             })
         </select>
-        <input type="submit" value="Consultar" />
+        <input id="btn-consultar-conf" type="submit" value="Consultar" />
     </form>
 </div>
 
