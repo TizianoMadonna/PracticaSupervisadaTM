@@ -6,7 +6,7 @@
     int pageNumber = ViewBag.PageNumber;
     int pageSize = ViewBag.PageSize;
     int totalPages = ViewBag.TotalPages;
-    TimeOnly? horasTrabajadas = ViewBag.HorasTrabajadas as TimeOnly?;
+    TimeSpan? horasTrabajadas = ViewBag.HorasTrabajadas as TimeSpan?;
     int? mesSeleccionado = ViewBag.MesSeleccionado as int?;
     int? anioSeleccionado = ViewBag.AnioSeleccionado as int?;
 }
@@ -108,7 +108,8 @@
 @if (horasTrabajadas.HasValue && mesSeleccionado.HasValue && anioSeleccionado.HasValue)
 {
     <div id="div-respuesta-consulta">
-        <h3>Horas trabajadas en @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mesSeleccionado.Value) @anioSeleccionado.Value: @horasTrabajadas.Value</h3>
+        <h3>Horas trabajadas en @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mesSeleccionado.Value) @anioSeleccionado.Value: @Math.Floor(horasTrabajadas.Value.TotalHours):@horasTrabajadas.Value.Minutes hs</h3>
+
     </div>
 }
 <div class="pagination" id="pag-fun">
@@ -211,6 +212,6 @@
 
 <script>
     function confirmarEliminar(form) {
-        return confirm("¿Está seguro que desea eliminar este registro?");
+        return confirm("¿Está seguro/a que desea eliminar este registro?");
     }
 </script>

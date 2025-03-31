@@ -67,8 +67,8 @@ namespace PracticaSupervisada.Controllers
 
             IQueryable<Asistencia> asistencias = _context.Asistencias.OrderByDescending(e => e.Id).Take(800);
             int totalAsistencias = await _context.Asistencias.CountAsync();
-            int currentPage = 1; 
-            int pageSize = 3; 
+            int currentPage = 1;
+            int pageSize = 3;
             var pagedList = await asistencias.Skip((currentPage - 1) * pageSize)
                                               .Take(pageSize)
                                               .ToListAsync();
@@ -80,20 +80,25 @@ namespace PracticaSupervisada.Controllers
             return View("Index", pagedList);
         }
 
-        private TimeOnly CalcularHorasTrabajadas(int mes, int anio)
+        private TimeSpan CalcularHorasTrabajadas(int mes, int anio)
         {
             var asistencias = _context.Asistencias
-                .Where(a => a.Fecha.Year == anio && a.Fecha.Month == mes)
-                .ToList();
+                                .Where(a => a.Fecha.Year == anio && a.Fecha.Month == mes)
+                                .ToList();
 
-            var horasTrabajadas = asistencias
-                .Sum(a => (a.Tiempo_Salida - a.Tiempo_Entrada).TotalHours);
+            var horasTrabajo = asistencias
+                .Sum(a => (a.Tiempo_Salida.Ticks - a.Tiempo_Entrada.Ticks));
 
-            TimeSpan timeSpan = TimeSpan.FromHours(horasTrabajadas);
 
-            TimeOnly timeOnly = TimeOnly.FromTimeSpan(timeSpan);
+            if (horasTrabajo > TimeSpan.MaxValue.Ticks)
+            {
+                horasTrabajo = TimeSpan.MaxValue.Ticks;
+            }
 
-            return timeOnly;
+
+            TimeSpan timeSpan = TimeSpan.FromTicks(horasTrabajo);
+
+            return timeSpan;
         }
     
 
