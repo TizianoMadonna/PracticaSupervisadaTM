@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,39 +21,45 @@ namespace PracticaSupervisada.Controllers
             _context = context;
         }
 
+        [Authorize]
         // GET: Bidones
-        public async Task<IActionResult> Index(int? Busqanio, int? Busqmes, int? pageNumber, int pageSize = 3)
+        public async Task<IActionResult> Index(int? Busqanio, int? Busqmes, int? pageNumber, int pageSize = 10)
         {
 
-            IQueryable<Bidones> bidones = _context.Bidones.OrderByDescending(e => e.Id).Take(800);
+            if (!Busqanio.HasValue)
+            {
+                Busqanio = DateTime.Now.Year;
+            }
+            if (!Busqmes.HasValue)
+            {
+                Busqmes = DateTime.Now.Month;
+            }
 
-            if (Busqanio.HasValue && Busqanio!= 0)
+            var bidonesEntregados = CalcularBidonesEntregados(Busqmes.Value, Busqanio.Value);
+
+            IQueryable<Bidones> bidones = _context.Bidones.OrderByDescending(e => e.Fecha);
+
+            if (Busqanio.Value != 0)
             {
                 bidones = bidones.Where(e => e.Fecha.Year == Busqanio);
             }
-            if (Busqmes.HasValue && Busqmes!= 0)
+            if (Busqmes.Value != 0)
             {
                 bidones = bidones.Where(e => e.Fecha.Month == Busqmes);
             }
 
-            int totalBidones = await bidones.CountAsync();
+            var listaBidones = await bidones.ToListAsync();
 
-            int currentPage = pageNumber ?? 1;
-            var pagedList = await bidones.Skip((currentPage - 1) * pageSize)
-                                                      .Take(pageSize)
-                                                      .ToListAsync();
-
-            ViewBag.PageNumber = currentPage;
-            ViewBag.PageSize = pageSize;
-            ViewBag.TotalPages = (int)Math.Ceiling((double)totalBidones / pageSize);
-
+            ViewBag.BidonesEntregados = bidonesEntregados;
+            ViewBag.MesSeleccionado = Busqmes;
+            ViewBag.AnioSeleccionado = Busqanio;
             ViewBag.Busqanio = Busqanio;
             ViewBag.Busqmes = Busqmes;
 
-            return View(pagedList);
+            return View(listaBidones);
         }
         [HttpPost]
-        public async Task<IActionResult> ConsultarBidonesEntregados(int mes, int anio)
+        public async Task<IActionResult> ConsultarBidonesEntregados(int mes, int anio, int? Busqanio, int? Busqmes)
         {
             var bidonesEntregados = CalcularBidonesEntregados(mes, anio);
             ViewBag.BidonesEntregados = bidonesEntregados;
@@ -67,11 +74,23 @@ namespace PracticaSupervisada.Controllers
                                               .Take(pageSize)
                                               .ToListAsync();
 
+            if (Busqanio.HasValue && Busqanio.Value != 0)
+            {
+                bidones = bidones.Where(e => e.Fecha.Year == Busqanio);
+            }
+            if (Busqmes.HasValue && Busqmes != 0)
+            {
+                bidones = bidones.Where(e => e.Fecha.Month == Busqmes);
+            }
+
+            var listaBidones = await bidones.ToListAsync();
+
+
             ViewBag.PageNumber = currentPage;
             ViewBag.PageSize = pageSize;
             ViewBag.TotalPages = (int)Math.Ceiling((double)totalBidones / pageSize);
 
-            return View("Index", pagedList);
+            return View("Index", listaBidones);
         }
 
         private int CalcularBidonesEntregados(int mes, int anio)
@@ -105,6 +124,7 @@ namespace PracticaSupervisada.Controllers
         }
 
         // GET: Bidones/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();

@@ -3,6 +3,97 @@
     margin-bottom: 10px;
 }
 
+#bidonesTable_wrapper {
+    margin-top: 200px;
+}
+
+#asistenciaTable_wrapper {
+    margin-top: 200px;
+}
+
+#bidonesTable_filter input {
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+.dataTables_info, .dataTables_length select {
+    font-size: 14px;
+}
+
+.btn-action {
+    padding: 3px 8px;
+    font-size: 14px;
+    margin: 2px;
+}
+
+#resultado-bidones {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #333;
+}
+
+.dt-buttons .btn {
+    margin-right: 5px;
+}
+
+.loading-spinner {
+    display: none;
+    margin-left: 10px;
+}
+
+#asistenciaTable {
+    width: 100% !important;
+    margin-top: 20px;
+}
+
+#resultado-horas {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #333;
+}
+
+#asistenciaTable_filter input {
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0.3em 0.8em;
+    margin: 0 2px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+}
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background: #007bff;
+        color: white !important;
+        border: 1px solid #007bff;
+    }
+
+.btn-action {
+    padding: 3px 8px;
+    font-size: 14px;
+    margin: 2px;
+}
+
+.filtros-container {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: -200px;
+    padding-bottom: -500px;
+    margin-inline-end: 10px;
+}
+
+    .filtros-container input,
+    .filtros-container select {
+        margin-right: 10px;
+    }
+
 #input-busqueda-conf {
     width: 60px;
 }
@@ -76,7 +167,7 @@
 }
 
 #btn-principal {
-    margin: 50px;
+    margin-bottom: 50px;
     width: 400px;
     height: 100px;
     font-size: 30px;

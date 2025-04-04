@@ -3,215 +3,195 @@
 
 @{
     ViewData["Title"] = "Asistencia limpieza";
-    int pageNumber = ViewBag.PageNumber;
-    int pageSize = ViewBag.PageSize;
-    int totalPages = ViewBag.TotalPages;
     TimeSpan? horasTrabajadas = ViewBag.HorasTrabajadas as TimeSpan?;
     int? mesSeleccionado = ViewBag.MesSeleccionado as int?;
     int? anioSeleccionado = ViewBag.AnioSeleccionado as int?;
 }
-<div id="txt-principal">
-    <h1>Planilla de asistencia</h1>
-</div>
 
-<p id="p-btn-agregar">
-    <form id="p-btn-agregar" asp-action="Create" method="get">
-        <button id="btn-agregar" type="submit">Agregar</button>
-    </form>
-</p>
-<div>
-    <form asp-action="Index" method="get">
-        Nombre <input id="input-busqueda" type="text" value="@ViewBag.Busqnombre" name="Busqnombre" />
-        Mes
-        <select id="input-busqueda" name="Busqmes" value="@ViewBag.Busqmes">
-            <option value="0">Seleccione un mes</option>
-            @for (int i = 1; i <= 12; i++)
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1>Planilla de asistencia</h1>
+        </div>
+        <div class="col-md-4 text-right">
+            <form asp-action="Create" method="get">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-plus"></i> Agregar Nuevo
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="filtros-container">
+        <form asp-action="Index" method="get" class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="Busqmes" class="col-form-label">Mes:</label>
+            </div>
+            <div class="col-auto">
+                <select id="Busqmes" class="form-select form-select-sm" name="Busqmes" onchange="this.form.submit()">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        <option value="@i" selected="@(ViewBag.Busqmes != null && ViewBag.Busqmes == i)">
+                            @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-auto">
+                <label for="Busqanio" class="col-form-label">Año:</label>
+            </div>
+            <div class="col-auto">
+                <select id="Busqanio" class="form-select form-select-sm" name="Busqanio" onchange="this.form.submit()">
+                    @for (int i = 2023; i <= DateTime.Now.Year; i++)
+                    {
+                        <option value="@i" selected="@(ViewBag.Busqanio != null && ViewBag.Busqanio == i)">
+                            @i
+                        </option>
+                    }
+                </select>
+            </div>
+
+            @if (horasTrabajadas.HasValue && mesSeleccionado.HasValue && anioSeleccionado.HasValue)
             {
-                <option value="@i">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
+                <div class="col-12 text-center mt-2 mt-md-0">
+                    <div id="resultado-horas">
+                        <h4 class="mb-0">
+                            <i class="fas fa-clock"></i> Horas trabajadas en @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mesSeleccionado.Value) @anioSeleccionado.Value:
+                            <strong>@Math.Floor(horasTrabajadas.Value.TotalHours):@horasTrabajadas.Value.Minutes.ToString("00") hs</strong>
+                        </h4>
+                    </div>
+                </div>
             }
-        </select>
-        Año <select id="input-busqueda" value="@ViewBag.Busqanio" name="Busqanio" value="@DateTime.Now.Year" min="2022" max="@DateTime.Now.Year">
-            <option value="0">Seleccione un año</option>
-            @for (int i = 2020; i <= DateTime.Now.Year; i++)
-            {
-                <option value="@i">@i</option>
-            })
-        </select>
-        <input id="input-busqueda-conf" type="submit" value="Filtrar" />
-    </form>
+        </form>
+    </div>
 
-</div>  
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre_Apellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tiempo_Entrada)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tiempo_Salida)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model) {
+    <table id="asistenciaTable" class="table table-striped table-bordered nowrap" style="width:100%">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre_Apellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tiempo_Entrada)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tiempo_Salida)
-                </td>
-                <td>
-                    <form asp-action="Edit" asp-controller="Asistencias" method="get" asp-route-Id="@item.Id">
-                        <button id="btn-fun" class="btn-info" type="submit">Editar</button>
-                    </form>
-                    <form asp-action="Delete" asp-route-Id="@item.Id" asp-controller="Asistencias" onsubmit="return confirmarEliminar(this)">
-                        <button id="btn-fun" class="btn-danger" type="submit">Eliminar</button>
-                    </form>
-                </td>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Hora Entrada</th>
+                <th>Hora Salida</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-</table>
-<div id="div-consulta">
-    <h2>Consultar horas trabajadas del mes de:</h2>
-    <form asp-action="ConsultarHorasTrabajadas" method="post">
-        <select id="inp-consulta" name="mes">
-            @for (int i = 1; i <= 12; i++)
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
             {
-                <option value="@i">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre_Apellido)</td>
+                    <td>@item.Fecha.ToString("dd/MM/yyyy")</td>
+                    <td>@ConvertToNewTimeFormat(item.Tiempo_Entrada)</td>
+                    <td>@ConvertToNewTimeFormat(item.Tiempo_Salida)</td>
+                    <td class="text-center">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <form asp-action="Edit" method="get" asp-route-id="@item.Id">
+                                <button type="submit" class="btn btn-info btn-action">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </form>
+                            <form asp-action="Delete" method="post" asp-route-id="@item.Id" onsubmit="return confirmarEliminar(this)">
+                                <button type="submit" class="btn btn-danger btn-action">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
             }
-        </select>
-        <select id="inp-consulta" value="@ViewBag.anioSeleccionado" name="anio" value="@DateTime.Now.Year" min="2025" max="@DateTime.Now.Year">
-            @for (int i = 2025; i <= DateTime.Now.Year; i++)
-            {
-                <option value="@i">@i</option>
-            })
-        </select>
-        <input id="btn-consultar-conf" type="submit" value="Consultar" />
-    </form>
+        </tbody>
+    </table>
 </div>
 
-@if (horasTrabajadas.HasValue && mesSeleccionado.HasValue && anioSeleccionado.HasValue)
-{
-    <div id="div-respuesta-consulta">
-        <h3>Horas trabajadas en @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(mesSeleccionado.Value) @anioSeleccionado.Value: @Math.Floor(horasTrabajadas.Value.TotalHours):@horasTrabajadas.Value.Minutes hs</h3>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    </div>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#asistenciaTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    },
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)"
+                },
+                "responsive": true,
+                "dom": '<"top"Bfl>rt<"bottom"ip><"clear">',
+                "buttons": [
+                    {
+                        extend: 'excel',
+                        text: '<i class="fas fa-file-excel"></i> Excel',
+                        className: 'btn btn-success btn-sm',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fas fa-file-pdf"></i> PDF',
+                        className: 'btn btn-danger btn-sm',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fas fa-print"></i> Imprimir',
+                        className: 'btn btn-info btn-sm',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3]
+                        }
+                    }
+                ],
+                "pageLength": 5,
+                "lengthMenu": [5, 10, 25, 50, 100],
+                "order": [[1, "desc"]],
+                "columnDefs": [
+                    { "orderable": false, "targets": 4 },
+                    { "responsivePriority": 1, "targets": 0 },
+                    { "responsivePriority": 2, "targets": 1 },
+                    { "responsivePriority": 3, "targets": 4 }
+                ]
+            });
+        });
+
+        function confirmarEliminar(form) {
+            if (confirm("¿Está seguro que desea eliminar este registro?")) {
+                return true;
+            }
+            return false;
+        }
+    </script>
 }
-<div class="pagination" id="pag-fun">
-
-    @if (pageNumber > 1)
+@functions {
+    private string ConvertToNewTimeFormat(TimeOnly time)
     {
-        <form asp-action="Index" method="get">
-            @*             <input type="hidden" name="Busqfecha" value="@ViewBag.Busqfecha" />
- *@ 
-            <input type="hidden" name="Busqanio" value="@ViewBag.Busqanio" />
-            <input type="hidden" name="Busqmes" value="@ViewBag.Busqmes" />
-            <input type="hidden" name="Busqnombre" value="@ViewBag.Busqnombre" />
-            <input type="hidden" name="anio" value="@ViewBag.anioSeleccionado"/>
-            <input type="hidden" name="mes" value="@ViewBag.mesSeleccionado" />
-            <input type="hidden" name="pageNumber" value="@(pageNumber - 1)" />
-            <input type="hidden" name="pageSize" value="@pageSize" />
-            <button id="btn-pag" type="submit">&larr;</button>
-        </form>
-    }
-    @if (pageNumber > 3)
-    {
-        <div>
-            <form asp-action="Index" method="get">
-                <input type="hidden" name="Busqanio" value="@ViewBag.Busqanio" />
-                <input type="hidden" name="Busqmes" value="@ViewBag.Busqmes" />
-                <input type="hidden" name="Busqnombre" value="@ViewBag.Busqnombre" />
-                <input type="hidden" name="anio" value="@ViewBag.anioSeleccionado" />
-                <input type="hidden" name="mes" value="@ViewBag.mesSeleccionado" />
-                <input type="hidden" name="pageNumber" value="1" />
-                <input type="hidden" name="pageSize" value="@pageSize" />
-                <button id="btn-pag" type="submit">1</button>
-            </form>
-        </div>
-        <div style="color: black; font-size:20px;">
-            ...
-        </div>
-    }
-
-    @{
-        int startPage = Math.Max(1, pageNumber - 2);
-        int endPage = Math.Min(totalPages, pageNumber + 2);
-    }
-
-    @for (int i = startPage; i <= endPage; i++)
-    {
-        if (i == pageNumber)
+        if (time < new TimeOnly(12, 0))
         {
-            <span>@i</span>
+            time = time.AddHours(12);
         }
-        else
-        {
-            <form asp-action="Index" method="get" style="display:inline;">
-                @*                 <input type="hidden" name="Busqfecha" value="@ViewBag.Busqfecha" />
- *@                <input type="hidden" name="Busqanio" value="@ViewBag.Busqanio" />
-                <input type="hidden" name="Busqmes" value="@ViewBag.Busqmes" />
-                <input type="hidden" name="Busqnombre" value="@ViewBag.Busqnombre" />
-                <input type="hidden" name="anio" value="@ViewBag.anioSeleccionado" />
-                <input type="hidden" name="mes" value="@ViewBag.mesSeleccionado" />
-                <input type="hidden" name="pageNumber" value="@i" />
-                <input type="hidden" name="pageSize" value="@pageSize" />
-                <button id="btn-pag" type="submit" style="margin:5px;">@i</button>
-            </form>
-        }
+        return time.ToString("HH:mm");
     }
-    @if (pageNumber < totalPages-2)
-    {
-        <div style="color: black; font-size:20px;">
-            ...
-        </div>
-        <div>
-            <form asp-action="Index" method="get">
-            <input type="hidden" name="Busqanio" value="@ViewBag.Busqanio" />
-            <input type="hidden" name="Busqmes" value="@ViewBag.Busqmes" />
-            <input type="hidden" name="Busqnombre" value="@ViewBag.Busqnombre" />
-            <input type="hidden" name="anio" value="@ViewBag.anioSeleccionado" />
-            <input type="hidden" name="mes" value="@ViewBag.mesSeleccionado" />
-            <input type="hidden" name="pageNumber" value="@totalPages" />
-            <input type="hidden" name="pageSize" value="@pageSize" />
-                <button id="btn-pag" type="submit">@totalPages</button>
-        </form>
-    </div>
-    }
-    @if (pageNumber < totalPages)
-    {
-        <form asp-action="Index" method="get">
-@*             <input type="hidden" name="Busqfecha" value="@ViewBag.Busqfecha" />
- *@
-            <input type="hidden" name="Busqanio" value="@ViewBag.Busqanio" />
-            <input type="hidden" name="Busqmes" value="@ViewBag.Busqmes" />
-            <input type="hidden" name="Busqnombre" value="@ViewBag.Busqnombre" />
-            <input type="hidden" name="anio" value="@ViewBag.anioSeleccionado" />
-            <input type="hidden" name="mes" value="@ViewBag.mesSeleccionado" />
-            <input type="hidden" name="pageNumber" value="@(pageNumber + 1)" />
-            <input type="hidden" name="pageSize" value="@pageSize" />
-
-            <button id="btn-pag" type="submit">&rarr;</button>
-        </form>
-    }
-</div>
-
-<script>
-    function confirmarEliminar(form) {
-        return confirm("¿Está seguro/a que desea eliminar este registro?");
-    }
-</script>
+}

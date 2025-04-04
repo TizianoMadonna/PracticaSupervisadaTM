@@ -1,16 +1,16 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/PracticaSupervisada/css/PSstyle.0q4d93kf9l.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\PSstyle.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"0q4d93kf9l"},{"Name":"integrity","Value":"sha256-KO7ft1jnUBpAGCRPdj0G31hQVDDuy1Cgnd/QY75qvA8="},{"Name":"label","Value":"_content/PracticaSupervisada/css/PSstyle.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5749"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022KO7ft1jnUBpAGCRPdj0G31hQVDDuy1Cgnd/QY75qvA8=\u0022"},{"Name":"Last-Modified","Value":"Thu, 03 Apr 2025 12:39:47 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/PracticaSupervisada/css/PSstyle.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\PSstyle.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Vp4T7M/swl7132AmWdFpi55OxPBToGg5bQiCjhmsIjA="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4116"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022Vp4T7M/swl7132AmWdFpi55OxPBToGg5bQiCjhmsIjA=\u0022"},{"Name":"Last-Modified","Value":"Fri, 28 Mar 2025 14:48:38 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/PracticaSupervisada/css/PSstyle.qw5z166ybo.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\PSstyle.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qw5z166ybo"},{"Name":"integrity","Value":"sha256-Vp4T7M/swl7132AmWdFpi55OxPBToGg5bQiCjhmsIjA="},{"Name":"label","Value":"_content/PracticaSupervisada/css/PSstyle.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4116"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022Vp4T7M/swl7132AmWdFpi55OxPBToGg5bQiCjhmsIjA=\u0022"},{"Name":"Last-Modified","Value":"Fri, 28 Mar 2025 14:48:38 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-KO7ft1jnUBpAGCRPdj0G31hQVDDuy1Cgnd/QY75qvA8="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"5749"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022KO7ft1jnUBpAGCRPdj0G31hQVDDuy1Cgnd/QY75qvA8=\u0022"},{"Name":"Last-Modified","Value":"Thu, 03 Apr 2025 12:39:47 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/PracticaSupervisada/css/site.c2tiyv64ts.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
@@ -748,13 +748,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\PracticaSupervisada.bii4oxyoy2.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"bii4oxyoy2"},{"Name":"integrity","Value":"sha256-s5J5rTwuVjJf7c4lKx/0Rf5SrqDvzcio7/2hKC48\u002Bck="},{"Name":"label","Value":"_content/PracticaSupervisada/PracticaSupervisada.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1137"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022s5J5rTwuVjJf7c4lKx/0Rf5SrqDvzcio7/2hKC48\u002Bck=\u0022"},{"Name":"Last-Modified","Value":"Tue, 25 Mar 2025 13:22:01 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1137"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022s5J5rTwuVjJf7c4lKx/0Rf5SrqDvzcio7/2hKC48\u002Bck=\u0022"},{"Name":"Last-Modified","Value":"Fri, 04 Apr 2025 14:22:35 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/PracticaSupervisada/PracticaSupervisada.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\PracticaSupervisada.bii4oxyoy2.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-s5J5rTwuVjJf7c4lKx/0Rf5SrqDvzcio7/2hKC48\u002Bck="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1137"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022s5J5rTwuVjJf7c4lKx/0Rf5SrqDvzcio7/2hKC48\u002Bck=\u0022"},{"Name":"Last-Modified","Value":"Tue, 25 Mar 2025 13:22:01 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1137"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022s5J5rTwuVjJf7c4lKx/0Rf5SrqDvzcio7/2hKC48\u002Bck=\u0022"},{"Name":"Last-Modified","Value":"Fri, 04 Apr 2025 14:22:35 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
   </ItemGroup>
 </Project>

@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PracticaSupervisada.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/PSstyle.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/PSstyle.css" asp-append-version="true"/>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script src="https://accounts.google.com/gsi/"async></script>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+
 </head>
 <body>
     <header>
@@ -21,23 +25,88 @@
                     var paginaActual = HttpContextAccessor.HttpContext.Request.Path;
                 }
                 @if (paginaActual != "/" && paginaActual != "/Home/Index"){
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Asistencias" asp-action="Index">Asistencia</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Bidones" asp-action="Index">Agua</a>
-                        </li>
-                    </ul>
-@*                     <partial name="_LoginPartial" />
- *@             </div>
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Asistencias" asp-action="Index">Asistencia</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Bidones" asp-action="Index">Agua</a>
+                            </li>
+                        </ul>
+                    </div>
                 }
-                
+
+                @*                      <partial name="_LoginPartial" />
+ *@                
+                 @if (User.Identity.Name == null)
+                { 
+@*                     <div id="g_id_onload"
+                    data-client_id="125434168034-30mr815on1kkhns2aa44eb2s1p85a536.apps.googleusercontent.com"
+                    data-context="signin"
+                    data-ux_mode="popup"
+                    data-login_uri="https://localhost:7067/"
+                    data-nonce=""
+                    data-auto_select="true"
+                    data-itp_support="true">
+                    </div>
+
+                    <div class="g_id_signin"
+                    data-type="standard"
+                    data-shape="pill"
+                    data-theme="outline"
+                    data-text="signin_with"
+                    data-size="large"
+                    data-logo_alignment="left">
+                    </div>
+                    <div id="g_id_onload"
+                         data-client_id="125434168034-30mr815on1kkhns2aa44eb2s1p85a536.apps.googleusercontent.com"
+                         data-callback="handleGoogleSignIn"
+                         data-context="signin"
+                         data-ux_mode="popup"
+                         data-auto_select="true">
+                    </div>
+
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-shape="pill"
+                         data-theme="outline"
+                         data-text="signin_with"
+                         data-size="large">
+                    </div> *@
+                 }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                            @User.Identity.Name
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <form asp-controller="Account" asp-action="Logout" method="post">
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    
+@*                     <div class="g_id_signin" data-type="standard"></div>
+                    <a href="/signin-google" class="btn btn-primary">Login con Google</a> *@
+                    <form asp->
+                    <div class="g_id_signin" data-type="standard"></div>
+                        <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Privacy">Acceder con google</a>
+                    </form>
+                }
+
             </div>
         </nav>
     </header>
@@ -50,11 +119,16 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2025 - Controles de agua y asistencias -
+            <div class="container">
+                &copy; @DateTime.Now.Year 
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

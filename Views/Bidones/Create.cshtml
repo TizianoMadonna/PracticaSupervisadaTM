@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Agregar";
+    string date = DateTime.Now.ToString("yyyy-MM-dd");
 }
 
 <h1 id="contenedor-body">Agregar</h1>
@@ -16,7 +17,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Fecha" class="control-label"></label>
-                <input asp-for="Fecha" class="form-control" type="date" />
+                <input value="@date" asp-for="Fecha" class="form-control" type="date" />
                 <span asp-validation-for="Fecha" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -38,8 +39,7 @@
 
 <div id="contenedor-btn">
     <form asp-action="index" method="get">
-        <button id="btn-crear" class="btn-secondary">Regresar</button>
-
+        <button id="btn-crear" class="btn-secondary">Lista</button>
     </form>
 </div>
 

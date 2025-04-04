@@ -6,10 +6,45 @@
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/PracticaSupervisada.styles.css" asp-append-version="true" />
 <div class="text-center">
-    <form asp-controller="Asistencias" asp-action="Index" id="form-principal" method="get">
-        <button type="submit" id="btn-principal">Control de asistencias</button>
-    </form>
-    <form asp-controller="Bidones" asp-action="Index" id="form-principal" method="get">
-        <button type="submit" id="btn-principal">Control de agua</button>
-    </form>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            <div>
+                <h3>
+                    Asistencias
+                </h3>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-sm-2">
+                    <form asp-controller="Asistencias" asp-action="Index" id="form-principal" method="get">
+                        <button type="submit" id="btn-principal" class="btn btn-primary">Lista</button>
+                    </form>
+                </div>
+                <div class="col-12 col-md-6 col-sm-2">
+                    <form asp-controller="Asistencias" asp-action="Create" id="form-principal" method="get">
+                        <button type="submit" id="btn-principal" class="btn btn-secondary">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <h3>
+                    Bidones
+                </h3>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-sm-2">
+                    <form asp-controller="Bidones" asp-action="Index" id="form-principal" method="get">
+                        <button type="submit" id="btn-principal" class="btn btn-primary">Lista</button>
+                    </form>
+                </div>
+                <div class="col-12 col-md-6 col-sm-2">
+                    <form asp-controller="Bidones" asp-action="Create" id="form-principal" method="get">
+                        <button type="submit" id="btn-principal" class="btn btn-secondary">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
 </div>
