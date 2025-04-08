@@ -29,34 +29,32 @@
     </div>
 
     <div class="filtros-container">
-        <form asp-action="Index" method="get" class="row g-3 align-items-center">
-            <div class="col-auto">
-                <label for="Busqmes" class="col-form-label">Mes:</label>
-            </div>
-            <div class="col-auto">
-                <select id="Busqmes" class="form-select form-select-sm" name="Busqmes" onchange="this.form.submit()">
-                    @for (int i = 1; i <= 12; i++)
-                    {
-                        <option value="@i" selected="@((ViewBag.Busqmes != null && ViewBag.Busqmes == i))">
-                            @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)
-                        </option>
-                    }
-                </select>
-            </div>
+        <form asp-action="Index" method="get" class="row g-3 align-items-center row">
+                <div class="row g-2">
+                    <div class="col-12 col-md-auto">
+                        <label for="Busqmes" class="form-label">Mes:</label>
+                        <select id="Busqmes" class="form-select form-select-sm" name="Busqmes" onchange="this.form.submit()">
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <option value="@i" selected="@(ViewBag.Busqmes != null && ViewBag.Busqmes == i)">
+                                    @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)
+                                </option>
+                            }
+                        </select>
+                    </div>
 
-            <div class="col-auto">
-                <label for="Busqanio" class="col-form-label">Año:</label>
-            </div>
-            <div class="col-auto">
-                <select id="Busqanio" class="form-select form-select-sm" name="Busqanio" onchange="this.form.submit()">
-                    @for (int i = 2020; i <= DateTime.Now.Year; i++)
-                    {
-                        <option value="@i" selected="@((ViewBag.Busqanio != null && ViewBag.Busqanio == i))">
-                            @i
-                        </option>
-                    }
-                </select>
-            </div>
+                    <div class="col-12 col-md-auto">
+                        <label for="Busqanio" class="form-label">Año:</label>
+                        <select id="Busqanio" class="form-select form-select-sm" name="Busqanio" onchange="this.form.submit()">
+                            @for (int i = 2023; i <= DateTime.Now.Year; i++)
+                            {
+                                <option value="@i" selected="@(ViewBag.Busqanio != null && ViewBag.Busqanio == i)">
+                                    @i
+                                </option>
+                            }
+                        </select>
+                    </div>
+                </div>
 
             @if (bidonesEntregados.HasValue && mesSeleccionado.HasValue && anioSeleccionado.HasValue)
             {
