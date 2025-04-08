@@ -9,7 +9,6 @@
     }
 });
 
-
 function confirmarEliminar(form) {
     if (confirm("¿Está seguro que desea eliminar este registro?")) {
         return true;
