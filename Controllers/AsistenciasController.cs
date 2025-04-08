@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -23,13 +25,58 @@ namespace PracticaSupervisada.Controllers
         }
 
         // GET: Asistencias
-        public async Task<IActionResult> Index(string? Busqnombre, int? Busqanio, int? Busqmes, int? pageNumber, int pageSize = 3)
+        [Authorize]
+        public async Task<IActionResult> Index(int? Busqanio, int? Busqmes, int? pageNumber, int pageSize = 10)
         {
-            IQueryable<Asistencia> asistencias = _context.Asistencias.OrderByDescending(e => e.Id).Take(800);
-            if (Busqnombre != null)
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
+
+            if (!Busqanio.HasValue)
             {
-                asistencias = asistencias.Where(e => e.Nombre_Apellido.Contains(Busqnombre));
+                Busqanio = DateTime.Now.Year;
             }
+            if (!Busqmes.HasValue)
+            {
+                Busqmes = DateTime.Now.Month;
+            }
+
+            var horasTrabajadas = CalcularHorasTrabajadas(Busqmes.Value, Busqanio.Value);
+
+            IQueryable<Asistencia> asistencias = _context.Asistencias.OrderByDescending(e => e.Id)
+                                                                     .Where(a => a.UserEmail == userEmail);
+
+            if (Busqanio.Value != 0)
+            {
+                asistencias = asistencias.Where(e => e.Fecha.Year == Busqanio);
+            }
+            if (Busqmes.Value != 0)
+            {
+                asistencias = asistencias.Where(e => e.Fecha.Month == Busqmes);
+            }
+
+            var listaAsistencias = await asistencias.ToListAsync();
+
+            ViewBag.HorasTrabajadas = horasTrabajadas;
+            ViewBag.MesSeleccionado = Busqmes;
+            ViewBag.AnioSeleccionado = Busqanio;
+            ViewBag.Busqanio = Busqanio;
+            ViewBag.Busqmes = Busqmes;
+
+            return View(listaAsistencias);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ConsultarHorasTrabajadas(int mes, int anio, string? Busqnombre, int? Busqanio, int? Busqmes)
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
+            var horasTrabajadas = CalcularHorasTrabajadas(mes, anio);
+            ViewBag.HorasTrabajadas = horasTrabajadas;
+            ViewBag.MesSeleccionado = mes;
+            ViewBag.AnioSeleccionado = anio;
+
+            IQueryable<Asistencia> asistencias = _context.Asistencias.OrderByDescending(e => e.Id)  
+                                                                     .Where(a => a.UserEmail == userEmail);
+
             if (Busqanio.HasValue && Busqanio.Value != 0)
             {
                 asistencias = asistencias.Where(e => e.Fecha.Year == Busqanio);
@@ -39,51 +86,22 @@ namespace PracticaSupervisada.Controllers
                 asistencias = asistencias.Where(e => e.Fecha.Month == Busqmes);
             }
 
+            var listaAsistencias = await asistencias.ToListAsync();
 
-            int totalAsistencias = await asistencias.CountAsync();
-
-            int currentPage = pageNumber ?? 1;
-            var pagedList = await asistencias.Skip((currentPage - 1) * pageSize)
-                                                      .Take(pageSize)
-                                                      .ToListAsync();
-
-            ViewBag.PageNumber = currentPage;
-            ViewBag.PageSize = pageSize;
-            ViewBag.TotalPages = (int)Math.Ceiling((double)totalAsistencias / pageSize);
-
-            ViewBag.Busqanio = Busqanio; 
+            ViewBag.Busqanio = Busqanio;
             ViewBag.Busqmes = Busqmes;
             ViewBag.Busqnombre = Busqnombre;
 
-            return View(pagedList);
-        }
-        [HttpPost]
-        public async Task<IActionResult> ConsultarHorasTrabajadas(int mes, int anio)
-        {
-            var horasTrabajadas = CalcularHorasTrabajadas(mes, anio);
-            ViewBag.HorasTrabajadas = horasTrabajadas;
-            ViewBag.MesSeleccionado = mes;
-            ViewBag.AnioSeleccionado = anio;
-
-            IQueryable<Asistencia> asistencias = _context.Asistencias.OrderByDescending(e => e.Id).Take(800);
-            int totalAsistencias = await _context.Asistencias.CountAsync();
-            int currentPage = 1;
-            int pageSize = 3;
-            var pagedList = await asistencias.Skip((currentPage - 1) * pageSize)
-                                              .Take(pageSize)
-                                              .ToListAsync();
-
-            ViewBag.PageNumber = currentPage;
-            ViewBag.PageSize = pageSize;
-            ViewBag.TotalPages = (int)Math.Ceiling((double)totalAsistencias / pageSize);
-
-            return View("Index", pagedList);
+            return View("Index", listaAsistencias);
         }
 
         private TimeSpan CalcularHorasTrabajadas(int mes, int anio)
         {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
             var asistencias = _context.Asistencias
                                 .Where(a => a.Fecha.Year == anio && a.Fecha.Month == mes)
+                                .Where(a => a.UserEmail == userEmail)
                                 .ToList();
 
             var horasTrabajo = asistencias
@@ -121,6 +139,7 @@ namespace PracticaSupervisada.Controllers
         }
 
         // GET: Asistencias/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -135,6 +154,10 @@ namespace PracticaSupervisada.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
+                asistencia.UserEmail = userEmail;
+
                 _context.Add(asistencia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -149,8 +172,11 @@ namespace PracticaSupervisada.Controllers
             {
                 return NotFound();
             }
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
 
             var asistencia = await _context.Asistencias.FindAsync(id);
+            asistencia.UserEmail = userEmail;
+
             if (asistencia == null)
             {
                 return NotFound();
@@ -163,12 +189,15 @@ namespace PracticaSupervisada.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre_Apellido,Fecha,Tiempo_Entrada,Tiempo_Salida")] Asistencia asistencia)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre_Apellido,Fecha,Tiempo_Entrada,Tiempo_Salida, UserEmail")] Asistencia asistencia)
         {
             if (id != asistencia.Id)
             {
                 return NotFound();
             }
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
+            asistencia.UserEmail = userEmail;
 
             if (ModelState.IsValid)
             {

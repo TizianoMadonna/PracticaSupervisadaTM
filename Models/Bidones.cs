@@ -14,5 +14,8 @@ namespace PracticaSupervisada.Models
         public int Cantidad { get; set; }
         [Display(Name = "Observaciones")]
         public string? Observaciones { get; set; }
+
+        public string? UserEmail { get; set; }
+
     }
 }

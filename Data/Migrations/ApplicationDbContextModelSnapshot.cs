@@ -17,7 +17,7 @@ namespace PracticaSupervisada.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.13")
+                .HasAnnotation("ProductVersion", "9.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -245,6 +245,9 @@ namespace PracticaSupervisada.Data.Migrations
                     b.Property<TimeOnly>("Tiempo_Salida")
                         .HasColumnType("time");
 
+                    b.Property<string>("UserEmail")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Asistencias");
@@ -265,6 +268,9 @@ namespace PracticaSupervisada.Data.Migrations
                         .HasColumnType("date");
 
                     b.Property<string>("Observaciones")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserEmail")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

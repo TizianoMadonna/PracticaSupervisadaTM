@@ -10,38 +10,107 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PracticaSupervisada.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/PSstyle.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://accounts.google.com/gsi/client" async></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    @{
+        var paginaActual = HttpContextAccessor.HttpContext.Request.Path;
+        var esPaginaLogin = paginaActual == "/Home/Ingresar";
+    }
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom shadow fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img id="logo" style="width:110px;" src="~/Images/Logo.png"/></a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img id="logo" style="width:110px;" src="~/Images/Logo.png" />
+                </a>
 
                 @{
-                    var paginaActual = HttpContextAccessor.HttpContext.Request.Path;
+                    var path = HttpContextAccessor.HttpContext.Request.Path.ToString().ToLower();
+                    var esPrincipal = path == "/" || path.Contains("/home/index");
+                    var esPrincipalLog = path == "/" || path.Contains("home/ingresar");
                 }
-                @if (paginaActual != "/" && paginaActual != "/Home/Index"){
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Asistencias" asp-action="Index">Asistencia</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Bidones" asp-action="Index">Agua</a>
-                        </li>
-                    </ul>
-@*                     <partial name="_LoginPartial" />
- *@             </div>
+
+                @if (!esPrincipal && !esPrincipalLog)
+                {
+                    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Asistencias" asp-action="Index">Asistencia</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Bidones" asp-action="Index">Agua</a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user"></i> @User.Identity.Name
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li>
+                                        <form asp-controller="Account" asp-action="Logout" method="post" class="px-3">
+                                            <button type="submit" class="btn btn-link dropdown-item text-danger">
+                                                <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 }
-                
+                else
+                {
+                    <div class="ms-auto">
+                        <form asp-controller="Account" asp-action="Logout" method="post">
+                            <button type="submit" class="btn btn-outline-danger">
+                                <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                            </button>
+                        </form>
+                    </div>
+                }
+
             </div>
         </nav>
-    </header>
-    <div class="container">
+    }
+    else
+    {
+        <body style="background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);">
+            <div>
+                <img id="cont-logo" src="~/Images/Logo.png" class="text-center" />
+            </div>
+            <div class="container" id="cont-iniciar">
+                <div class="row justify-content-center">
+                    <div>
+                        <div class="card shadow" id="contenedor-iniciar">
+                            <div class="card-header bg-secondary text-white">
+                                <h2 class="card-title text-center">Ingresar</h2>
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text">
+                                    <div class="g_id_signin card-body" data-type="standard">
+                                        <a class="btn btn-primary card-text" id="btn-google" asp-controller="Home" asp-action="Ingresar">
+                                            <i class="fab fa-google" id="btn-google-g"></i>
+                                        </a>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+    }
+
+    <div class="container" style="margin-top: 90px;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -49,12 +118,26 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - Controles de agua y asistencias -
+            &copy; @DateTime.Now.Year - Controles de agua y asistencias -
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        document.addEventListener('click', function (event) {
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            const isClickInsideNavbar = navbarCollapse.contains(event.target);
+            const isToggler = event.target.closest('.navbar-toggler');
+
+            if (!isClickInsideNavbar && !isToggler && navbarCollapse.classList.contains('show')) {
+                const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                bsCollapse.hide();
+            }
+        });
+    </script>
 </body>
 </html>
