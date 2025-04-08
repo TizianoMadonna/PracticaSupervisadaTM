@@ -22,6 +22,11 @@ public class HomeController : Controller
     [Authorize]
     public IActionResult Privacy()
     {
+        return View();
+    }
+    [Authorize]
+    public IActionResult Ingresar()
+    {
         return View("Index", "Home");
     }
 

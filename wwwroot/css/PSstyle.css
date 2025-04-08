@@ -3,6 +3,57 @@
     margin-bottom: 10px;
 }
 
+#btn-google {
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+}
+
+#contenedor-iniciar {
+    width: 400px;
+    height: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+@media (max-width: 1200px) {
+    #contenedor-iniciar {
+        width: 60%;
+    }
+}
+
+@media (max-width: 992px) {
+    #contenedor-iniciar {
+        width: 50%;
+    }
+}
+
+#cont-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    width: 750px;
+}
+@media (max-width: 1200px) {
+    #cont-logo {
+        width: 60%;
+    }
+}
+
+@media (max-width: 992px) {
+    #cont-logo {
+        width: 50%;
+    }
+}
+
 #bidonesTable_wrapper {
     margin-top: 200px;
 }
@@ -97,6 +148,37 @@
 #input-busqueda-conf {
     width: 60px;
 }
+
+.card-section {
+    transition: transform 0.3s ease;
+}
+
+    .card-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+.btn-action {
+    min-width: 120px;
+    margin: 5px 0;
+}
+
+.section-title {
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+    .section-title:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(to right, #0d6efd, #6c757d);
+    }
 
 #pag-fun {
     display: flex;
@@ -316,6 +398,14 @@
 
     #form-principal {
         margin-top: 40px;
+    }
+
+    .navbar-toggler {
+        margin-left: auto; /* Empuja el botón hacia la derecha */
+    }
+
+   {
+        margin-top:60px;
     }
 
     #btn-principal {

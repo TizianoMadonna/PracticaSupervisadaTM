@@ -17,24 +17,6 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-//builder.Services.AddAuthentication(options =>
-//{
-//    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-//})
-//.AddCookie(options =>
-//{
-//    options.Cookie.SameSite = SameSiteMode.Lax;
-//    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-//})
-//.AddGoogle(options =>
-//{
-//    options.ClientId = builder.Configuration["Google:ClientId"];
-//    options.ClientSecret = builder.Configuration["Google:ClientSecret"];
-//    options.CallbackPath = "/signin-google"; // Asegúrate que coincida
-//});
-
-
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
     options.MinimumSameSitePolicy = SameSiteMode.Lax;
@@ -69,6 +51,7 @@ builder.Services.AddAuthentication(options =>
     options.ClientId = googleAuthNSection["ClientId"];
     options.ClientSecret = googleAuthNSection["ClientSecret"];
     options.CallbackPath = "/signin-google";
+    options.Scope.Add("email");
 });
 
 builder.Services.AddAntiforgery(options =>

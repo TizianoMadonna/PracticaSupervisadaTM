@@ -4,14 +4,16 @@
     ViewData["Title"] = "Agregar";
     string date = DateTime.Now.ToString("yyyy-MM-dd");
 }
-<div id="contenedor-body">
+<div style="margin-top:100px;">
+
+    <div id="contenedor-body">
 
 <h1>Agregar</h1>
 </div>
 
-<h4 id="contenedor-body">Asistencia de limpieza</h4>
-<hr />
-<div class="row" id="contenedor-body">
+    <h4 id="contenedor-body">Asistencia de limpieza</h4>
+    <hr />
+    <div class="row" id="contenedor-body">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -42,13 +44,13 @@
     </div>
 </div>
 
-<div id="contenedor-btn">
+    <div id="contenedor-btn">
     <form asp-action="index" method="get">
         <button id="btn-crear" class="btn-secondary">Regresar</button>
 
     </form>
 </div>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

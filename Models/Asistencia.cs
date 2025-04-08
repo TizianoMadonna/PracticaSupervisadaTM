@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Azure.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace PracticaSupervisada.Models
 {
@@ -17,5 +18,8 @@ namespace PracticaSupervisada.Models
         [Display(Name = "Hora de salida")]
         [Required(ErrorMessage = "La hora de salida es requerida")]
         public TimeOnly Tiempo_Salida { get; set; }
+
+        public string? UserEmail { get; set; }
+
     }
 }

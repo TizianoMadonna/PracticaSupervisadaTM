@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,7 @@ namespace PracticaSupervisada.Controllers
         // GET: Bidones
         public async Task<IActionResult> Index(int? Busqanio, int? Busqmes, int? pageNumber, int pageSize = 10)
         {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
 
             if (!Busqanio.HasValue)
             {
@@ -37,7 +39,9 @@ namespace PracticaSupervisada.Controllers
 
             var bidonesEntregados = CalcularBidonesEntregados(Busqmes.Value, Busqanio.Value);
 
-            IQueryable<Bidones> bidones = _context.Bidones.OrderByDescending(e => e.Fecha);
+            IQueryable<Bidones> bidones = _context.Bidones.OrderByDescending(e => e.Fecha)
+                                                          .Where(a => a.UserEmail == userEmail);
+
 
             if (Busqanio.Value != 0)
             {
@@ -61,12 +65,17 @@ namespace PracticaSupervisada.Controllers
         [HttpPost]
         public async Task<IActionResult> ConsultarBidonesEntregados(int mes, int anio, int? Busqanio, int? Busqmes)
         {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
             var bidonesEntregados = CalcularBidonesEntregados(mes, anio);
             ViewBag.BidonesEntregados = bidonesEntregados;
             ViewBag.MesSeleccionado = mes;
             ViewBag.AnioSeleccionado = anio;
 
-            IQueryable<Bidones> bidones = _context.Bidones.OrderByDescending(e => e.Id).Take(800);
+            IQueryable<Bidones> bidones = _context.Bidones.OrderByDescending(e => e.Id)
+                                                          .Where(a => a.UserEmail == userEmail);
+
+
             int totalBidones = await _context.Bidones.CountAsync();
             int currentPage = 1;
             int pageSize = 3;
@@ -95,8 +104,11 @@ namespace PracticaSupervisada.Controllers
 
         private int CalcularBidonesEntregados(int mes, int anio)
         {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
             var bidones = _context.Bidones
                 .Where(a => a.Fecha.Year == anio && a.Fecha.Month == mes)
+                .Where(a => a.UserEmail == userEmail)
                 .ToList();
 
             var bidonesEntregados = bidones
@@ -139,6 +151,10 @@ namespace PracticaSupervisada.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
+                bidones.UserEmail = userEmail;
+
                 _context.Add(bidones);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -153,8 +169,11 @@ namespace PracticaSupervisada.Controllers
             {
                 return NotFound();
             }
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
 
             var bidones = await _context.Bidones.FindAsync(id);
+            bidones.UserEmail = userEmail;
+
             if (bidones == null)
             {
                 return NotFound();
@@ -167,12 +186,15 @@ namespace PracticaSupervisada.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,Cantidad,Observaciones")] Bidones bidones)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,Cantidad,Observaciones,UserEmail")] Bidones bidones)
         {
             if (id != bidones.Id)
             {
                 return NotFound();
             }
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
+            bidones.UserEmail = userEmail;
 
             if (ModelState.IsValid)
             {
