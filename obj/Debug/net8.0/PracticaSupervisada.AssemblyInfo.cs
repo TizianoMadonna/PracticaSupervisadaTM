@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PracticaSupervisada")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d34db01dd49a7669c8ac8c4f6b78be7832330c1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ecbaf145ad7429b9b9bd9474cacf795340caac25")]
 [assembly: System.Reflection.AssemblyProductAttribute("PracticaSupervisada")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PracticaSupervisada")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
