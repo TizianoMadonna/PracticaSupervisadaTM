@@ -32,14 +32,6 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNpc3RlbmNpYXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/source/repos/PracticaSupervisada/PracticaSupervisada/Views/Asistencias/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNpc3RlbmNpYXNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Usuario/source/repos/PracticaSupervisada/PracticaSupervisada/Views/Asistencias/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNpc3RlbmNpYXNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Usuario/source/repos/PracticaSupervisada/PracticaSupervisada/Views/Asistencias/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNpc3RlbmNpYXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -50,14 +42,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Usuario/source/repos/PracticaSupervisada/PracticaSupervisada/Views/Bidones/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmlkb25lc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Usuario/source/repos/PracticaSupervisada/PracticaSupervisada/Views/Bidones/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmlkb25lc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Usuario/source/repos/PracticaSupervisada/PracticaSupervisada/Views/Bidones/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmlkb25lc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Usuario/source/repos/PracticaSupervisada/PracticaSupervisada/Views/Bidones/Edit.cshtml]

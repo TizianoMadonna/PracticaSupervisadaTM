@@ -83,31 +83,32 @@
     }
     else
     {
-        <body style="background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);">
-            <div>
-                <img id="cont-logo" src="~/Images/Logo.png" class="text-center" />
-            </div>
-            <div class="container" id="cont-iniciar">
-                <div class="row justify-content-center">
-                    <div>
-                        <div class="card shadow" id="contenedor-iniciar">
-                            <div class="card-header bg-secondary text-white">
-                                <h2 class="card-title text-center">Ingresar</h2>
-                            </div>
-                            <div class="card-body text-center">
-                                <p class="card-text">
-                                    <div class="g_id_signin card-body" data-type="standard">
-                                        <a class="btn btn-primary card-text" id="btn-google" asp-controller="Home" asp-action="Ingresar">
-                                            <i class="fab fa-google" id="btn-google-g"></i>
-                                        </a>
-                                    </div>
-                                </p>
-                            </div>
+        <div class="container vh-100 d-flex justify-content-center align-items-center">
+            <div class="row w-100 g-4">
+                <div class="col-lg-6 col-md-8 col-sm-12 d-flex justify-content-center">
+                    <div class="card shadow w-50" style="aspect-ratio: 1 / 1; max-width: 300px;">
+                        <div class="card-header bg-secondary text-white text-center">
+                            <h2 class="card-title">Ingresar con Google</h2>
+                        </div>
+                        <div class="card-body text-center d-flex justify-content-center align-items-center">
+                            <a class="btn btn-primary w-125" id="btn-google" asp-controller="Home" asp-action="Ingresar">
+                                <i class="fab fa-google" id="g-google"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-6 col-md-8 col-sm-12 d-flex justify-content-center align-items-center">
+                    <img src="~/Images/Logo.png" class="img-fluid w-100" style="max-width:700px;" alt="Logo"/>
+                </div>
             </div>
-        </body>
+        </div>
+        <style>
+            body{
+                background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+                overflow:hidden;
+            }
+        </style>
     }
 
     <div class="container" style="margin-top: 90px;">
