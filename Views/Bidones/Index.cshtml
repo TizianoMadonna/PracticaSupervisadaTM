@@ -34,10 +34,13 @@
                     <div class="col-12 col-md-auto">
                         <label for="Busqmes" class="form-label">Mes:</label>
                         <select id="Busqmes" class="form-select form-select-sm" name="Busqmes" onchange="this.form.submit()">
+                            @{
+                                var textInfo = new CultureInfo("es-AR").TextInfo;
+                            }
                             @for (int i = 1; i <= 12; i++)
                             {
                                 <option value="@i" selected="@(ViewBag.Busqmes != null && ViewBag.Busqmes == i)">
-                                    @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)
+                                    @textInfo.ToTitleCase(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i))
                                 </option>
                             }
                         </select>
