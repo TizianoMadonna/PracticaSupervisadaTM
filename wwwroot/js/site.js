@@ -33,7 +33,10 @@ $(document).ready(function () {
             "infoFiltered": "(filtrado de _MAX_ registros totales)"
         },
         "responsive": true,
-        "dom": '<"top"Bfl>rt<"bottom"ip><"clear">',
+        "paging": false,
+        "lengthChange": false,
+        "info": false,
+        "dom": 'ftr<"bottom"B><"clear">',
         "buttons": [
             {
                 extend: 'excel',
@@ -60,8 +63,6 @@ $(document).ready(function () {
                 }
             }
         ],
-        "pageLength": 5,
-        "lengthMenu": [5, 10, 25, 50, 100],
         "order": [[0, "desc"]],
         "columnDefs": [
             { "orderable": false, "targets": 3 },
@@ -89,7 +90,10 @@ $(document).ready(function () {
             "infoFiltered": "(filtrado de _MAX_ registros totales)"
         },
         "responsive": true,
-        "dom": '<"top"Bfl>rt<"bottom"ip><"clear">',
+        "paging": false,
+        "lengthChange": false,
+        "info": false,
+        "dom": 'ftr<"bottom"B><"clear">',
         "buttons": [
             {
                 extend: 'excel',
@@ -116,8 +120,6 @@ $(document).ready(function () {
                 }
             }
         ],
-        "pageLength": 5,
-        "lengthMenu": [5, 10, 25, 50, 100],
         "order": [[1, "desc"]],
         "columnDefs": [
             { "orderable": false, "targets": 4 },
