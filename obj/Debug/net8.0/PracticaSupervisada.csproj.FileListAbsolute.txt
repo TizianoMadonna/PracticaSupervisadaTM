@@ -143,6 +143,7 @@ C:\Users\Usuario\source\repos\PracticaSupervisada\PracticaSupervisada\obj\Debug\
 C:\Users\Usuario\source\repos\PracticaSupervisada\PracticaSupervisada\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.PracticaSupervisada.props
 C:\Users\Usuario\source\repos\PracticaSupervisada\PracticaSupervisada\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PracticaSupervisada.props
 C:\Users\Usuario\source\repos\PracticaSupervisada\PracticaSupervisada\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\Usuario\source\repos\PracticaSupervisada\PracticaSupervisada\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Usuario\source\repos\PracticaSupervisada\PracticaSupervisada\obj\Debug\net8.0\Practica.3AEC34F9.Up2Date
 C:\Users\Usuario\source\repos\PracticaSupervisada\PracticaSupervisada\obj\Debug\net8.0\PracticaSupervisada.dll
 C:\Users\Usuario\source\repos\PracticaSupervisada\PracticaSupervisada\obj\Debug\net8.0\refint\PracticaSupervisada.dll
